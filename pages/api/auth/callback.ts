@@ -24,7 +24,7 @@ const Callback = APISupport().get(async (req, res) => {
         }
     });
     if (!token.ok) {
-        res.status(400).json({ error: "Invalid code" });
+        res.status(400).json({ error: "Invalid code", code: 400 });
         return;
     }
 
