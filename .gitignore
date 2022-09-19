@@ -38,5 +38,5 @@ next-env.d.ts
 # ide
 .idea/
 
-# datas
-data/
+# data
+/data/

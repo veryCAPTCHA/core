@@ -23,5 +23,7 @@ const guildData = new mongoose.Schema({
     verifiedUser: {type: Array}
 });
 
-export const data = mongoose.models.captchaData || mongoose.model("captchaData", guildData)
-// export const data = mongoose.models.test || mongoose.model("test", guildData)
+const data = mongoose.models.captchaData || mongoose.model('captchaData', guildData);
+const test = mongoose.models.test || mongoose.model("test", guildData);
+
+export { data, test }

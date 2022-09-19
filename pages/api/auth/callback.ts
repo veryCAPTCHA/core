@@ -3,10 +3,13 @@ import config from "../../../data/config.json";
 import {encryption} from "../../../utils/crypto";
 import {serialize} from "cookie";
 
+/**
+ * Callback for the Discord OAuth2
+ * Response Code : 301, 400
+ */
 const Callback = APISupport().get(async (req, res) => {
-    const qCode = req.query.code;
     if (!req.query.code) {
-        res.status(400).json({ error: "No code provided" });
+        res.status(400).json({ message: "No code provided", code: 400 });
         return;
     }
 
@@ -17,14 +20,14 @@ const Callback = APISupport().get(async (req, res) => {
             client_secret: config.CLIENT_SECRET,
             redirect_uri: config.DEFAULT_URL + "/api/auth/callback",
             grant_type: "authorization_code",
-            code: `${qCode}`,
+            code: `${req.query.code}`,
         }),
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         }
     });
     if (!token.ok) {
-        res.status(400).json({ error: "Invalid code", code: 400 });
+        res.status(400).json({ message: "Invalid code", code: 400 });
         return;
     }
 
